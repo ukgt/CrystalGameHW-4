@@ -42,25 +42,23 @@
         }
 
         $(".gem").on("click", function(){
-            console.log($(this).data("value"));
-            console.log(this);
-            $()
-
+            // console.log($(this).data("value"));
+            // console.log(this);
+             $(this).data(onGoingSum);
+            console.log($("#onGoingSum"));
         })
-
-
-
+       
     });
 
-if (onGoingSum === displayNumber) {
-console.log("Win!");
+// if (onGoingSum === displayNumber) {
+// console.log("Win!");
 
-}
+// }
 
-else if (onGoingSum >= displayNumber){
-console.log ("Loss!");
+// else if (onGoingSum >= displayNumber){
+// console.log ("Loss!");
 
-}
+// }
 // if onGoingSum=displayNumber then win
 // if over then=losses
 // reset after win or loss
