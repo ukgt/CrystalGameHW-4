@@ -43,8 +43,10 @@
 
        
         $(".gem").on("click", function(){
+          
             onGoingSum = onGoingSum + $(this).attr("data-value");
             parseInt($("data-value").val(), onGoingSum); 
+            $(this).appendTo(onGoingSum);
 
             // console.log($(this).data("value"));
             // console.log(this);
