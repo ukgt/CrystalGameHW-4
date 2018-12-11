@@ -1,0 +1,12 @@
+body {
+  background-color: rgb(243, 255, 240);
+}
+
+
+#number {
+  font-size: 30px;
+  margin-left: 250px;
+  margin-top: -55px;
+  font-weight: bold;
+  color: gray;
+}
