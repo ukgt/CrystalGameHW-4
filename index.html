@@ -1,94 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Crystal Game!</title>
-    <link rel="stylesheet" href="assets\css\style.css">
-</head>
+    <link rel="stylesheet" href="assets\css\style.css" />
+  </head>
 
-<body>
-    <h1>Target Number: </h1>
-    <div id="number">
+  <body>
+    <h1>Target Number:</h1>
+    <div id="number"></div>
+
+    <div class="gem" data-value=""><img src="assets\images\1.jpg" /></div>
+    <div class="gem" data-value=""><img src="assets\images\6.jpg" /></div>
+    <div class="gem" data-value=""><img src="assets\images\3.jpg" /></div>
+    <div class="gem" data-value="">
+      <img src="assets\images\snowflake4.jpg" />
     </div>
-
-    <div class="gem" data-value=""><img src=assets\images\1.jpg></div>
-    <div class="gem" data-value=""><img src=assets\images\snowflake2.jpg></div>
-    <div class="gem" data-value=""><img src=assets\images\3.jpg></div>
-    <div class="gem" data-value=""><img src=assets\images\snowflake4.jpg></div>
+    <br />
+    <br />
     <p id="onGoingSum">Current Sum:</p>
     <p id="wins">Wins:</p>
     <p id="losses">Losses:</p>
     <div id="reset"></div>
-
-
+    <p>Click on the crystals above to match the Target Number. Have Fun!</p>
 
     <!-- SCRIPT STARTS HERE -->
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--
+      Psuedo Code:
+      Goal of game: to click on crystals until sum associated with each = displayed Number.
+      Create 4 gems (style later with images)
+      Assign each to generate a random number
+      Have display number to have a random number
+      On click function will add to current sum
+      if current sum = display number user wins
+      win is logged to "wins"
+      if current sum > display number user loses
+      loss is logged to "losses"
+      instructions for game
+    -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+    ></script>
     <script type="text/javascript">
-        let displayNumber;
-        let onGoingSum = 0;
-        let wins = 0;
-        let losses = 0;
-        
+      let displayNumber;
+      let onGoingSum = 0;
+      let wins = 0;
+      let losses = 0;
 
-        $(document).ready(function () {
+      $(document).ready(function() {
+        let x = "Hello World";
+        displayNumber = Math.floor(Math.random() * 70) + 30;
+        $("#number").text(displayNumber);
 
-            let x = 'Hello World';
-            displayNumber = Math.floor(Math.random() * 70) + 30;
-            $("#number").text(displayNumber);
+        for (let i = 0; i < 4; i++) {
+          let temp = Math.floor(Math.random() * 25);
+          $(".gem")
+            .eq(i)
+            .attr("data-value", temp);
+        }
 
-            for (let i = 0; i < 4; i++) {
-                let temp = Math.floor(Math.random() * 25)
-                $(".gem").eq(i).attr("data-value", temp);
-            }
+        $(".gem").on("click", function() {
+          let val = parseInt($(this).attr("data-value"));
+          onGoingSum = onGoingSum + val;
+          //    let sum= parseInt($("data-value").val(), onGoingSum);
+          $("#onGoingSum").html("Current Sum: " + onGoingSum);
 
+          // console.log($(this).data("value"));
+          // console.log(this);
+          console.log(onGoingSum);
+          console.log($(this).attr("data-value"));
 
-            $(".gem").on("click", function () {
-                let val = parseInt($(this).attr("data-value"))
-                onGoingSum = onGoingSum + val;
-                //    let sum= parseInt($("data-value").val(), onGoingSum); 
-                $("#onGoingSum").html("Current Sum: " + onGoingSum);
-
-                // console.log($(this).data("value"));
-                // console.log(this);
-                console.log(onGoingSum);
-                console.log($(this).attr("data-value"));
-
-                score();
-            })
-
-
-            function score() {
-                if (onGoingSum === displayNumber) {
-                    wins += 1;
-                    $("#wins").text("Wins: " + wins);
-                    reset();
-                    console.log(wins);
-                } else if (onGoingSum > displayNumber) {
-                    losses += 1;
-                    $("#losses").text("Losses: " + losses);
-                    reset();
-                }
-
-            }
-
-            function reset() {
-                displayNumber = Math.floor(Math.random() * 70) + 30;
-                onGoingSum = 0;
-                for (let i = 0; i < 4; i++) {
-                    let temp = Math.floor(Math.random() * 25);
-                    $(".gem").eq(i).attr("data-value", temp);
-                }
-
-                $("#number").text(displayNumber);
-                $("#onGoingSum").html("Current Sum: " + onGoingSum);
-            }
-
+          score();
         });
+
+        function score() {
+          if (onGoingSum === displayNumber) {
+            wins += 1;
+            $("#wins").text("Wins: " + wins);
+            reset();
+            console.log(wins);
+          } else if (onGoingSum > displayNumber) {
+            losses += 1;
+            $("#losses").text("Losses: " + losses);
+            reset();
+          }
+        }
+
+        function reset() {
+          displayNumber = Math.floor(Math.random() * 70) + 30;
+          onGoingSum = 0;
+          for (let i = 0; i < 4; i++) {
+            let temp = Math.floor(Math.random() * 25);
+            $(".gem")
+              .eq(i)
+              .attr("data-value", temp);
+          }
+
+          $("#number").text(displayNumber);
+          $("#onGoingSum").html("Current Sum: " + onGoingSum);
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
