@@ -54,26 +54,44 @@
             // console.log(this);
             console.log(onGoingSum);
              console.log($(this).attr("data-value"));
+         
         })
        
-        
-         function score() {
+        function reset() {
+
+        if (displayNumber > onGoingSum) {
+
+         displayNumber = 0;
+        }
+}       
+        function score() {
             if (onGoingSum === displayNumber) {
-               wins += 1;
+               wins++;
                $("#wins").text("Wins: " + wins);
-            //    reset();
-               console.log(wins);
+                             
          }
-        
+       
+         else if (onGoingSum > displayNumber) {
+
+             losses--;
+             $("#losses").html("Losses: " + losses);
+
+          }
         }
         score();
+        reset();
+
+
+
+
+
+
+
+
 
 
 
     });
-
-       
-
-
+    
     </script>
 </html>
